@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url          
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -41,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
+    'cloudinary_storage',
+    'cloudinary',
     'django.contrib.staticfiles',
     'core',
 ]
@@ -80,10 +85,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": dj_database_url.parse(
+        os.getenv("DATABASE_URL"),
+        conn_max_age=0,          # مهم لـ Vercel serverless
+        conn_health_checks=True,
+    )
 }
 
 
@@ -127,6 +133,27 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'core/static'),  # مسار ملفاتك الثابتة
 ]
 
+# إعدادات الوسائط (الصور المرفوعة)
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # لخدمة الملفات الثابتة في الإنتاج، يمكنك استخدام whitenoise
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')  # ضعها بعد SecurityMiddleware
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Cloudinary Configuration
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('oa7vh506'),
+    'API_KEY': os.getenv('696585871723958'),
+    'API_SECRET': os.getenv('--nZ_dGSotf3cspFPTHY6V9vsGk'),
+}
+
+# Django 4.2+ recommended setting
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

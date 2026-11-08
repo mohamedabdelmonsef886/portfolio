@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-
+from .models import ContactMessage, Project 
 # Create your views here.
 from .models import ContactMessage
 
@@ -16,6 +16,6 @@ def home(request):
         )
 
         return redirect("home")
-
-    return render(request, "index.html")
+    projects = Project.objects.all() 
+    return render(request, "index.html", {"projects": projects})
 

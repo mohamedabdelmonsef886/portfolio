@@ -147,43 +147,38 @@
             <div class="container">
                 <h2 class="section-title">My Projects</h2>
                 <div class="projects-grid">
-                    <!-- Project 1 -->
+                    {% for project in projects %}
                     <div class="project-card">
-                        <img src="{% static 'images/pro_4.png' %}" alt="Portfolio Website" class="card-img" loading="lazy">
+                        <!-- عرض الصورة إذا وجدت، وإلا عرض صورة افتراضية -->
+                        {% if project.image %}
+                            <img src="{{ project.image.url }}" alt="{{ project.title }}" class="card-img" loading="lazy">
+                        {% else %}
+                            <img src="{% static 'images/pro_2.png' %}" alt="{{ project.title }}" class="card-img" loading="lazy">
+                        {% endif %}
+                        
                         <div class="card-content">
-                            <h3 class="card-title">Personal Portfolio</h3>
-                            <p class="card-desc">A responsive portfolio website built with HTML, CSS, and JavaScript to showcase my skills and projects.</p>
+                            <h3 class="card-title">{{ project.title }}</h3>
+                            <p class="card-desc">{{ project.description }}</p>
+                            
                             <div class="card-links">
-                                <a href="https://portfolio-seven-nu-i705mfh5qb.vercel.app/" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live</a>
-                                <a href="https://github.com/mohamedabdelmonsef886/portfolio" class="btn btn-outline"><i class="fab fa-github"></i> Code</a>
+                                {% if project.live_url %}
+                                    <a href="{{ project.live_url }}" target="_blank" class="btn btn-primary">
+                                        <i class="fas fa-external-link-alt"></i> Live
+                                    </a>
+                                {% endif %}
+                                
+                                {% if project.github_url %}
+                                    <a href="{{ project.github_url }}" target="_blank" class="btn btn-outline">
+                                        <i class="fab fa-github"></i> Code
+                                    </a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                    <!-- Project 2 -->
-                    <div class="project-card">
-                        <img src="{% static 'images/con_5.png' %}" alt="Contact Form" class="card-img" loading="lazy">
-                        <div class="card-content">
-                            <h3 class="card-title">Contact Form (Django)</h3>
-                            <p class="card-desc">A contact form built using Django that stores user messages in the admin panel.</p>
-                            <div class="card-links">
-                                <a href="https://portfolio-seven-nu-i705mfh5qb.vercel.app/" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live</a>
-                                <a href="https://github.com/mohamedabdelmonsef886/portfolio/blob/main/core/templates/index.html" class="btn btn-outline"><i class="fab fa-github"></i> Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 3 -->
-                    <div class="project-card">
-                        <img src="{% static 'images/pro_2.png' %}" alt="Global network" class="card-img" loading="lazy">
-                        <div class="card-content">
-                            <h3 class="card-title">Card Design</h3>
-                            <p class="card-desc">Design a card to accurately display products</p>
-                            <div class="card-links">
-                                <a href="http://127.0.0.1:5501/" class="btn btn-primary"><i class="fas fa-external-link-alt"></i> Live</a>
-                                <a href="https://github.com/mohamedabdelmonsef886" class="btn btn-outline"><i class="fab fa-github"></i> Code</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Project 4 -->
+                    {% empty %}
+                        <!-- هذه الرسالة تظهر فقط إذا كانت قاعدة البيانات فارغة -->
+                        <p style="color: var(--text-secondary); text-align: center; grid-column: 1 / -1;">No projects added yet. Add some from the admin panel!</p>
+                    {% endfor %}
                 </div>
             </div>
         </section>
