@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
         "localhost",
         "portfolio-seven-nu-i705mfh5qb.vercel.app",
 ]
-
+if os.getenv("VERCEL"):
+    ALLOWED_HOSTS.append(".vercel.app")
 
 # Application definition
 
