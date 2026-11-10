@@ -31,9 +31,10 @@ DEBUG = not os.getenv("VERCEL")
 ALLOWED_HOSTS = [
         "127.0.0.1",
         "localhost",
+        ".vercel.app"
 ]
-if os.getenv("VERCEL"):
-    ALLOWED_HOSTS.append(".vercel.app")
+# if os.getenv("VERCEL"):
+#     ALLOWED_HOSTS.append(".vercel.app")
 
 # Application definition
 
