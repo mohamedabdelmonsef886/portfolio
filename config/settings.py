@@ -34,8 +34,8 @@ ALLOWED_HOSTS = [
         "localhost",
         ".vercel.app"
 ]
-if os.getenv("VERCEL"):
-    ALLOWED_HOSTS.append("portfolio-izp4k6cwm-mohamedabdelmonsef886s-projects.vercel.app")
+# if os.getenv("VERCEL"):
+#     ALLOWED_HOSTS.append("portfolio-izp4k6cwm-mohamedabdelmonsef886s-projects.vercel.app")
 
 #     ALLOWED_HOSTS.append(".vercel.app")
 
