@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ContactMessage, Project
-# Register your models here.
+
 
 # تخصيص شكل عرض الرسائل
 @admin.register(ContactMessage)

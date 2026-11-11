@@ -25,15 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-h#bp4fdz^0(s4f^+_m$)_g%wf_y9^$ei0l8m60-kto7kmzhp60')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = not os.getenv("VERCEL")
+
 DEBUG = not bool(os.getenv("VERCEL"))
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".vercel.app"]
-
-# if os.getenv("VERCEL"):
-#     ALLOWED_HOSTS.append("portfolio-izp4k6cwm-mohamedabdelmonsef886s-projects.vercel.app")
-
-#     ALLOWED_HOSTS.append(".vercel.app")
 
 # Application definition
 
