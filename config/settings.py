@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", 'django-insecure-h#bp4fdz^0(s4f^+_m$)_g%wf_
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = not os.getenv("VERCEL")
 DEBUG = not bool(os.getenv("VERCEL"))
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", ".vercel.app"]
 
 # if os.getenv("VERCEL"):
 #     ALLOWED_HOSTS.append("portfolio-izp4k6cwm-mohamedabdelmonsef886s-projects.vercel.app")
